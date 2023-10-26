@@ -17,7 +17,7 @@ RUN npm install
 RUN npm run build
 
 
-FROM build-stage as production-stage
+FROM node:18-alpine as production-stage
 
 COPY --from=build-stage /opt/vue-tools-ai/.output /opt/vue-tools-ai/.output
 
