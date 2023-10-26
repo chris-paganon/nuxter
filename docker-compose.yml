@@ -4,14 +4,13 @@ name: nuxter-server
 services:
   node:
     image: node:18-alpine
-    working_dir: /home/node/app
+    build: .
     restart: unless-stopped
-    volumes:
-      - .output:/home/node/app
-    command: 'node server/index.mjs'
 
   caddy:
     image: caddy:latest
+    depends_on:
+      - node
     restart: unless-stopped
     ports:
       - "80:80"
