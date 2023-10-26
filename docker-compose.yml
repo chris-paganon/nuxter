@@ -1,0 +1,16 @@
+version: '3.8'
+name: nuxter-server
+
+services:
+  node:
+    image: node
+    working_dir: /home/node/app
+    restart: always
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - .output:/home/node/app
+    ports:
+      - 3000:3000
+    command: 'node server/index.mjs'
+
