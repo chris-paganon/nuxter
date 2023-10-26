@@ -1,3 +1,7 @@
 localhost {
-	reverse_proxy node:3000
+	reverse_proxy node-production:3000
+}
+
+staging.localhost {
+	reverse_proxy node-staging:3000
 }
