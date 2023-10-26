@@ -3,22 +3,17 @@ name: nuxter-server
 
 services:
   node:
-    image: node
+    image: node:18-alpine
     working_dir: /home/node/app
     restart: unless-stopped
-    environment:
-      - NODE_ENV=production
     volumes:
       - .output:/home/node/app
     command: 'node server/index.mjs'
 
   caddy:
-    image: caddy
+    image: caddy:latest
     restart: unless-stopped
-    cap_add:
-      - NET_ADMIN
     ports:
-      - "3000:3000"
       - "80:80"
       - "443:443"
       - "443:443/udp"
