@@ -5,3 +5,7 @@ localhost {
 staging.localhost {
 	reverse_proxy node-staging:3000
 }
+
+umami.localhost {
+	reverse_proxy umami:3000
+}
