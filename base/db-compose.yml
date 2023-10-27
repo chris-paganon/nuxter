@@ -29,4 +29,5 @@ volumes:
   
 networks:
   caddy_network:
-    name: caddy_network
+    name: ${APP_NAME}_caddy_network
+    external: true

@@ -6,4 +6,5 @@ include:
     env_file: vue-ai/.env
   - path: ../base/umami-compose.yml
     env_file: vue-ai/.env
-  - ../base/db-compose.yml
+  - path: ../base/db-compose.yml
+    env_file: vue-ai/.env

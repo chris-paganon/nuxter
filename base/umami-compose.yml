@@ -14,6 +14,7 @@ services:
     restart: always
     networks:
       - caddy_network
+      - umami
 
   umami-db:
     image: postgres:15-alpine
@@ -30,7 +31,7 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - caddy_network
+      - umami
 
 volumes:
   umami-db-data:
@@ -41,4 +42,6 @@ secrets:
     
 networks:
   caddy_network:
-    name: caddy_network
+    name: ${APP_NAME}_caddy_network
+    external: true
+  umami:

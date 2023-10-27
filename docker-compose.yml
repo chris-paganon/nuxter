@@ -15,12 +15,13 @@ services:
       - caddy_data:/data
       - caddy_config:/config
     networks:
-      - caddy_network
+      - vue-ai_caddy_network
 
 volumes:
   caddy_data:
   caddy_config:
 
 networks:
-  caddy_network:
-    name: caddy_network
+  vue-ai_caddy_network:
+    name: vue-ai_caddy_network
+    external: true
