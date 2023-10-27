@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   umami:
+    container_name: ${APP_NAME}-umami
     image: ghcr.io/umami-software/umami:postgresql-latest
     environment:
       DATABASE_URL: postgresql://umami:umami@umami-db:5432/umami
@@ -11,6 +12,8 @@ services:
       umami-db:
         condition: service_healthy
     restart: always
+    networks:
+      - caddy_network
 
   umami-db:
     image: postgres:15-alpine
@@ -26,6 +29,8 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    networks:
+      - caddy_network
 
 volumes:
   umami-db-data:
@@ -33,3 +38,7 @@ volumes:
 secrets:
   umami_secret:
     file: ./umami_secret.env
+    
+networks:
+  caddy_network:
+    name: caddy_network

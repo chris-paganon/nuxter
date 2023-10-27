@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  node-production:
+    container_name: ${APP_NAME}-node-production
+    build: 
+      context: .
+      dockerfile: Dockerfile.apps
+      args:
+        REPO_URL: ${REPO_URL}
+        REPO_BRANCH: master
+    restart: unless-stopped
+    networks:
+      - caddy_network
+  
+  node-staging:
+    container_name: ${APP_NAME}-node-staging
+    build: 
+      context: .
+      dockerfile: Dockerfile.apps
+      args:
+        REPO_URL: ${REPO_URL}
+        REPO_BRANCH: stage
+    restart: unless-stopped
+    networks:
+      - caddy_network
+
+networks:
+  caddy_network:
+    name: caddy_network

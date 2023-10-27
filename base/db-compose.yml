@@ -2,21 +2,31 @@ version: '3.8'
 
 services:
   db-production:
+    container_name: ${APP_NAME}-db-production
     build: 
       context: .
       dockerfile: Dockerfile.db
     restart: unless-stopped
     volumes:
       - pb_data:/pb/pb_data
+    networks:
+      - caddy_network
 
   db-staging:
+    container_name: ${APP_NAME}-db-staging
     build: 
       context: .
       dockerfile: Dockerfile.db
     restart: unless-stopped
     volumes:
       - staging-pb_data:/pb/pb_data
+    networks:
+      - caddy_network
 
 volumes:
   pb_data:
   staging-pb_data:
+  
+networks:
+  caddy_network:
+    name: caddy_network

@@ -1,6 +1,2 @@
-docker compose \
-  -f docker-compose.yml \
-  -f vue-ai/umami-compose.yml \
-  -f vue-ai/apps-compose.yml \
-  -f vue-ai/db-compose.yml \
-  up --force-recreate
+docker compose up --force-recreate -d
+docker compose -f vue-ai/vue-ai-compose.yml up --force-recreate -d
