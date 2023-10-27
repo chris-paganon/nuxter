@@ -8,7 +8,7 @@ services:
       dockerfile: Dockerfile.db
     restart: unless-stopped
     volumes:
-      - ./vue-ai/pb_data:/pb/pb_data
+      - pb_data:/pb/pb_data
 
   db-staging:
     build: 
@@ -16,4 +16,8 @@ services:
       dockerfile: Dockerfile.db
     restart: unless-stopped
     volumes:
-      - ./vue-ai/staging-pb_data:/pb/pb_data
+      - staging-pb_data:/pb/pb_data
+
+volumes:
+  pb_data:
+  staging-pb_data:
