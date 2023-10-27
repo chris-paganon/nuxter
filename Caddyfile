@@ -1,6 +1,12 @@
 localhost {
 	reverse_proxy node-production:3000
 }
+db.localhost {
+	reverse_proxy db-production:8080
+}
+umami.localhost {
+	reverse_proxy umami:3000
+}
 
 staging.localhost {
 	basicauth * {
@@ -8,15 +14,6 @@ staging.localhost {
 	}
 	reverse_proxy node-staging:3000
 }
-
-umami.localhost {
-	reverse_proxy umami:3000
-}
-
-db.localhost {
-	reverse_proxy db-production:8080
-}
-
 staging.db.localhost {
 	basicauth * {
 		admin $2a$14$WG/2Gn5IazFeXrUhNX.HqezWSN.ITxr2JCzYat6ZDQZ5PHiWcFA9y
