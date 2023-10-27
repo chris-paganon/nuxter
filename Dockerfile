@@ -23,4 +23,6 @@ COPY --from=build-stage /opt/vue-tools-ai/.output /opt/vue-tools-ai/.output
 
 WORKDIR /opt/vue-tools-ai/.output/server
 
+# TODO: Handle environment variables/secrets for Nuxt
+
 CMD ["node", "index.mjs"]
