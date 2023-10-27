@@ -3,6 +3,9 @@ localhost {
 }
 
 staging.localhost {
+	basicauth * {
+		admin $2a$14$WG/2Gn5IazFeXrUhNX.HqezWSN.ITxr2JCzYat6ZDQZ5PHiWcFA9y
+	}
 	reverse_proxy node-staging:3000
 }
 
@@ -15,5 +18,8 @@ db.localhost {
 }
 
 staging.db.localhost {
+	basicauth * {
+		admin $2a$14$WG/2Gn5IazFeXrUhNX.HqezWSN.ITxr2JCzYat6ZDQZ5PHiWcFA9y
+	}
 	reverse_proxy db-staging:8080
 }
