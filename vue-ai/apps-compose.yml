@@ -5,6 +5,7 @@ services:
   node-production:
     build: 
       context: .
+      dockerfile: Dockerfile.apps
       args:
         REPO_URL: https://github.com/chris-paganon/vue-tools-ai.git
         REPO_BRANCH: master
@@ -13,6 +14,7 @@ services:
   node-staging:
     build: 
       context: .
+      dockerfile: Dockerfile.apps
       args:
         REPO_URL: https://github.com/chris-paganon/vue-tools-ai.git
         REPO_BRANCH: stage
