@@ -9,3 +9,7 @@ staging.localhost {
 umami.localhost {
 	reverse_proxy umami:3000
 }
+
+db.localhost {
+	reverse_proxy db-production:8080
+}

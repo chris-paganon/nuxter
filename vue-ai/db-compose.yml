@@ -1,0 +1,9 @@
+version: '3.8'
+name: nuxter-db-vueai
+
+services:
+  db-production:
+    build: 
+      context: .
+      dockerfile: Dockerfile.db
+    restart: unless-stopped
