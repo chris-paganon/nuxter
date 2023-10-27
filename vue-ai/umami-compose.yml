@@ -1,5 +1,4 @@
 version: '3.8'
-name: nuxter-umami-vueai
 
 services:
   umami:
@@ -12,6 +11,7 @@ services:
       umami-db:
         condition: service_healthy
     restart: always
+
   umami-db:
     image: postgres:15-alpine
     environment:
