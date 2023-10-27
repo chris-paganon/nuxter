@@ -2,27 +2,8 @@ version: '3.8'
 name: nuxter-server
 
 services:
-  node-production:
-    build: 
-      context: .
-      args:
-        REPO_URL: https://github.com/chris-paganon/vue-tools-ai.git
-        REPO_BRANCH: master
-    restart: unless-stopped
-  
-  node-staging:
-    build: 
-      context: .
-      args:
-        REPO_URL: https://github.com/chris-paganon/vue-tools-ai.git
-        REPO_BRANCH: stage
-    restart: unless-stopped
-
   caddy:
     image: caddy:latest
-    depends_on:
-      - node-production
-      - node-staging
     restart: unless-stopped
     ports:
       - "80:80"
