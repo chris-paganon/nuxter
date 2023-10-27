@@ -15,13 +15,29 @@ services:
       - caddy_data:/data
       - caddy_config:/config
     networks:
-      - vue-ai_caddy_network
+      - vue-ai_production_app_caddy
+      - vue-ai_staging_app_caddy
+      - vue-ai_production_db_caddy
+      - vue-ai_staging_db_caddy
+      - vue-ai_umami_caddy
 
 volumes:
   caddy_data:
   caddy_config:
 
 networks:
-  vue-ai_caddy_network:
-    name: vue-ai_caddy_network
+  vue-ai_production_app_caddy:
+    name: vue-ai_production_app_caddy
+    external: true
+  vue-ai_staging_app_caddy:
+    name: vue-ai_staging_app_caddy
+    external: true
+  vue-ai_production_db_caddy:
+    name: vue-ai_production_db_caddy
+    external: true
+  vue-ai_staging_db_caddy:
+    name: vue-ai_staging_db_caddy
+    external: true
+  vue-ai_umami_caddy:
+    name: vue-ai_umami_caddy
     external: true

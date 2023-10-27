@@ -10,7 +10,7 @@ services:
     volumes:
       - pb_data:/pb/pb_data
     networks:
-      - caddy_network
+      - production_db_caddy
 
   db-staging:
     container_name: ${APP_NAME}-db-staging
@@ -21,13 +21,16 @@ services:
     volumes:
       - staging-pb_data:/pb/pb_data
     networks:
-      - caddy_network
+      - staging_db_caddy
 
 volumes:
   pb_data:
   staging-pb_data:
   
 networks:
-  caddy_network:
-    name: ${APP_NAME}_caddy_network
+  production_db_caddy:
+    name: ${APP_NAME}_production_db_caddy
+    external: true
+  staging_db_caddy:
+    name: ${APP_NAME}_staging_db_caddy
     external: true

@@ -11,7 +11,7 @@ services:
         REPO_BRANCH: master
     restart: unless-stopped
     networks:
-      - caddy_network
+      - production_app_caddy
   
   node-staging:
     container_name: ${APP_NAME}-node-staging
@@ -23,9 +23,12 @@ services:
         REPO_BRANCH: stage
     restart: unless-stopped
     networks:
-      - caddy_network
+      - staging_app_caddy
 
 networks:
-  caddy_network:
-    name: ${APP_NAME}_caddy_network
+  production_app_caddy:
+    name: ${APP_NAME}_production_app_caddy
+    external: true
+  staging_app_caddy:
+    name: ${APP_NAME}_staging_app_caddy
     external: true
