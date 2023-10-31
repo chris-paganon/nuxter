@@ -9,6 +9,7 @@ services:
       args:
         REPO_URL: ${REPO_URL}
         REPO_BRANCH: master
+    env_file: ../${APP_NAME}/.env
     restart: unless-stopped
     networks:
       - production_app_caddy
@@ -21,6 +22,7 @@ services:
       args:
         REPO_URL: ${REPO_URL}
         REPO_BRANCH: stage
+    env_file: ../${APP_NAME}/.env
     restart: unless-stopped
     networks:
       - staging_app_caddy
