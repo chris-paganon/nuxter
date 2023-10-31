@@ -1,23 +1,25 @@
 FROM node:18-alpine as build-stage
 
-ARG REPO_URL=https://github.com/chris-paganon/vue-tools-ai/archive/refs/heads/
+ARG APP_NAME
+ARG REPO_URL
 ARG REPO_BRANCH=master
 
 RUN apk add --no-cache git unzip
 
-ADD ${REPO_URL}${REPO_BRANCH}.zip /opt/${REPO_BRANCH}.zip
-RUN unzip /opt/${REPO_BRANCH}.zip -d /opt
+ADD ${REPO_URL}${REPO_BRANCH}.zip /opt/${APP_NAME}-${REPO_BRANCH}.zip
+RUN unzip /opt/${APP_NAME}-${REPO_BRANCH}.zip -d /opt
 
-WORKDIR /opt/vue-tools-ai-${REPO_BRANCH}
+WORKDIR /opt/${APP_NAME}-${REPO_BRANCH}
 RUN npm install
 RUN npm run build
 
 
 FROM node:18-alpine as production-stage
 
+ARG APP_NAME
 ARG REPO_BRANCH=master
-COPY --from=build-stage /opt/vue-tools-ai-${REPO_BRANCH}/.output /opt/vue-tools-ai/.output
+COPY --from=build-stage /opt/${APP_NAME}-${REPO_BRANCH}/.output /opt/${APP_NAME}/.output
 
-WORKDIR /opt/vue-tools-ai/.output/server
+WORKDIR /opt/${APP_NAME}/.output/server
 
 CMD ["node", "index.mjs"]

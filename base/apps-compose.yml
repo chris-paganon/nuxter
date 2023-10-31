@@ -7,6 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile.apps
       args:
+        APP_NAME: ${APP_NAME}
         REPO_URL: ${REPO_URL}
         REPO_BRANCH: master
     env_file: ../${APP_NAME}/.env
@@ -20,6 +21,7 @@ services:
       context: .
       dockerfile: Dockerfile.apps
       args:
+        APP_NAME: ${APP_NAME}
         REPO_URL: ${REPO_URL}
         REPO_BRANCH: stage
     env_file: ../${APP_NAME}/.env
