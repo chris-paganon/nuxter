@@ -1,25 +1,22 @@
 FROM node:18-alpine as build-stage
 
-ARG REPO_URL=https://github.com/chris-paganon/vue-tools-ai.git
+ARG REPO_URL=https://github.com/chris-paganon/vue-tools-ai/archive/refs/heads/
 ARG REPO_BRANCH=master
 
-RUN apk add --no-cache git
+RUN apk add --no-cache git unzip
 
-WORKDIR /opt
+ADD ${REPO_URL}${REPO_BRANCH}.zip /opt/${REPO_BRANCH}.zip
+RUN unzip /opt/${REPO_BRANCH}.zip -d /opt
 
-RUN git clone $REPO_URL
-
-WORKDIR /opt/vue-tools-ai
-
-RUN git fetch origin $REPO_BRANCH
-RUN git checkout $REPO_BRANCH
+WORKDIR /opt/vue-tools-ai-${REPO_BRANCH}
 RUN npm install
 RUN npm run build
 
 
 FROM node:18-alpine as production-stage
 
-COPY --from=build-stage /opt/vue-tools-ai/.output /opt/vue-tools-ai/.output
+ARG REPO_BRANCH=master
+COPY --from=build-stage /opt/vue-tools-ai-${REPO_BRANCH}/.output /opt/vue-tools-ai/.output
 
 WORKDIR /opt/vue-tools-ai/.output/server
 
