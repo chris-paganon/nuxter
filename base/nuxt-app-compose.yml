@@ -1,11 +1,11 @@
 version: '3.8'
 
 services:
-  node:
-    container_name: ${APP_NAME}-node-${APP_ENV}
+  nuxt-app:
+    container_name: ${APP_NAME}-${APP_ENV}-nuxt-app
     build: 
       context: .
-      dockerfile: Dockerfile.apps
+      dockerfile: Dockerfile.nuxt-app
       args:
         APP_NAME: ${APP_NAME}
         REPO_URL: ${REPO_URL}
@@ -13,9 +13,9 @@ services:
     env_file: ../${APP_NAME}/${APP_ENV}.env
     restart: unless-stopped
     networks:
-      - app_caddy
+      - caddy_nuxt_app
 
 networks:
-  app_caddy:
-    name: ${APP_NAME}_${APP_ENV}_app_caddy
+  caddy_nuxt_app:
+    name: ${APP_NAME}_${APP_ENV}_caddy_nuxt_app
     external: true

@@ -1,7 +1,7 @@
-docker network create vue-tools-ai_production_app_caddy
-docker network create vue-tools-ai_staging_app_caddy
-docker network create vue-tools-ai_production_db_caddy
-docker network create vue-tools-ai_staging_db_caddy
+docker network create vue-tools-ai_production_caddy_nuxt_app
+docker network create vue-tools-ai_staging_caddy_nuxt_app
+docker network create vue-tools-ai_production_caddy_pb_db
+docker network create vue-tools-ai_staging_caddy_pb_db
 docker network create vue-tools-ai_umami_caddy
 
 docker compose up --force-recreate -d

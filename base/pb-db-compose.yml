@@ -1,24 +1,24 @@
 version: '3.8'
 
 services:
-  db:
-    container_name: ${APP_NAME}-db-${APP_ENV}
+  pb-db:
+    container_name: ${APP_NAME}-${APP_ENV}-pb-db
     build: 
       context: .
-      dockerfile: Dockerfile.db
+      dockerfile: Dockerfile.pb-db
       args:
         PB_ENCRYPTION_KEY: ${PB_ENCRYPTION_KEY}
     restart: unless-stopped
     volumes:
       - pb_data:/pb/pb_data
     networks:
-      - db_caddy
+      - caddy_pb_db
 
 volumes:
   pb_data:
     name: ${APP_NAME}_${APP_ENV}_pb_data
   
 networks:
-  db_caddy:
-    name: ${APP_NAME}_${APP_ENV}_db_caddy
+  caddy_pb_db:
+    name: ${APP_NAME}_${APP_ENV}_caddy_pb_db
     external: true
