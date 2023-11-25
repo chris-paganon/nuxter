@@ -6,6 +6,8 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile.db
+      args:
+        PB_ENCRYPTION_KEY: ${PB_ENCRYPTION_KEY}
     restart: unless-stopped
     volumes:
       - pb_data:/pb/pb_data
@@ -17,6 +19,8 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile.db
+      args:
+        PB_ENCRYPTION_KEY: ${PB_ENCRYPTION_KEY}
     restart: unless-stopped
     volumes:
       - staging-pb_data:/pb/pb_data

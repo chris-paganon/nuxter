@@ -18,5 +18,8 @@ RUN unzip /tmp/pb.zip -d /pb/
 
 EXPOSE 8080
 
+ARG PB_ENCRYPTION_KEY
+ENV PB_ENCRYPTION_KEY=${PB_ENCRYPTION_KEY}
+
 # start PocketBase
-CMD ["/pb/pocketbase", "serve", "--http=0.0.0.0:8080"]
+CMD ["/pb/pocketbase", "serve", "--encryptionEnv=PB_ENCRYPTION_KEY", "--http=0.0.0.0:8080"]
