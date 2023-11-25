@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-  db-production:
-    container_name: ${APP_NAME}-db-production
+  db:
+    container_name: ${APP_NAME}-db-${APP_ENV}
     build: 
       context: .
       dockerfile: Dockerfile.db
@@ -12,29 +12,13 @@ services:
     volumes:
       - pb_data:/pb/pb_data
     networks:
-      - production_db_caddy
-
-  db-staging:
-    container_name: ${APP_NAME}-db-staging
-    build: 
-      context: .
-      dockerfile: Dockerfile.db
-      args:
-        PB_ENCRYPTION_KEY: ${PB_ENCRYPTION_KEY}
-    restart: unless-stopped
-    volumes:
-      - staging-pb_data:/pb/pb_data
-    networks:
-      - staging_db_caddy
+      - db_caddy
 
 volumes:
   pb_data:
-  staging-pb_data:
+    name: ${APP_NAME}_${APP_ENV}_pb_data
   
 networks:
-  production_db_caddy:
-    name: ${APP_NAME}_production_db_caddy
-    external: true
-  staging_db_caddy:
-    name: ${APP_NAME}_staging_db_caddy
+  db_caddy:
+    name: ${APP_NAME}_${APP_ENV}_db_caddy
     external: true

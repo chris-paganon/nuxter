@@ -1,38 +1,21 @@
 version: '3.8'
 
 services:
-  node-production:
-    container_name: ${APP_NAME}-node-production
+  node:
+    container_name: ${APP_NAME}-node-${APP_ENV}
     build: 
       context: .
       dockerfile: Dockerfile.apps
       args:
         APP_NAME: ${APP_NAME}
         REPO_URL: ${REPO_URL}
-        REPO_BRANCH: master
-    env_file: ../${APP_NAME}/.env
+        REPO_BRANCH: ${REPO_BRANCH}
+    env_file: ../${APP_NAME}/${APP_ENV}.env
     restart: unless-stopped
     networks:
-      - production_app_caddy
-  
-  node-staging:
-    container_name: ${APP_NAME}-node-staging
-    build: 
-      context: .
-      dockerfile: Dockerfile.apps
-      args:
-        APP_NAME: ${APP_NAME}
-        REPO_URL: ${REPO_URL}
-        REPO_BRANCH: stage
-    env_file: ../${APP_NAME}/.env
-    restart: unless-stopped
-    networks:
-      - staging_app_caddy
+      - app_caddy
 
 networks:
-  production_app_caddy:
-    name: ${APP_NAME}_production_app_caddy
-    external: true
-  staging_app_caddy:
-    name: ${APP_NAME}_staging_app_caddy
+  app_caddy:
+    name: ${APP_NAME}_${APP_ENV}_app_caddy
     external: true
