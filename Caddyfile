@@ -15,8 +15,5 @@ staging.localhost {
 	reverse_proxy vue-tools-ai-staging-nuxt-app:3000
 }
 staging.db.localhost {
-	basicauth * {
-		admin $2a$14$WG/2Gn5IazFeXrUhNX.HqezWSN.ITxr2JCzYat6ZDQZ5PHiWcFA9y
-	}
 	reverse_proxy vue-tools-ai-staging-pb-db:8080
 }
