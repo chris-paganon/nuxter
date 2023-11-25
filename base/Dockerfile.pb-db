@@ -21,5 +21,7 @@ EXPOSE 8080
 ARG PB_ENCRYPTION_KEY
 ENV PB_ENCRYPTION_KEY=${PB_ENCRYPTION_KEY}
 
+# TODO: Maybe add script here to dowload from backup and/or to run migrations
+
 # start PocketBase
 CMD ["/pb/pocketbase", "serve", "--encryptionEnv=PB_ENCRYPTION_KEY", "--http=0.0.0.0:8080"]
