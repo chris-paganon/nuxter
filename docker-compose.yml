@@ -15,29 +15,29 @@ services:
       - caddy_data:/data
       - caddy_config:/config
     networks:
-      - vue-tools-ai_production_caddy_nuxt_app
-      - vue-tools-ai_staging_caddy_nuxt_app
-      - vue-tools-ai_production_caddy_pb_db
-      - vue-tools-ai_staging_caddy_pb_db
-      - vue-tools-ai_umami_caddy
+      - vue-ai-tools_production_caddy_nuxt_app
+      - vue-ai-tools_staging_caddy_nuxt_app
+      - vue-ai-tools_production_caddy_pb_db
+      - vue-ai-tools_staging_caddy_pb_db
+      - vue-ai-tools_umami_caddy
 
 volumes:
   caddy_data:
   caddy_config:
 
 networks:
-  vue-tools-ai_production_caddy_nuxt_app:
-    name: vue-tools-ai_production_caddy_nuxt_app
+  vue-ai-tools_production_caddy_nuxt_app:
+    name: vue-ai-tools_production_caddy_nuxt_app
     external: true
-  vue-tools-ai_staging_caddy_nuxt_app:
-    name: vue-tools-ai_staging_caddy_nuxt_app
+  vue-ai-tools_staging_caddy_nuxt_app:
+    name: vue-ai-tools_staging_caddy_nuxt_app
     external: true
-  vue-tools-ai_production_caddy_pb_db:
-    name: vue-tools-ai_production_caddy_pb_db
+  vue-ai-tools_production_caddy_pb_db:
+    name: vue-ai-tools_production_caddy_pb_db
     external: true
-  vue-tools-ai_staging_caddy_pb_db:
-    name: vue-tools-ai_staging_caddy_pb_db
+  vue-ai-tools_staging_caddy_pb_db:
+    name: vue-ai-tools_staging_caddy_pb_db
     external: true
-  vue-tools-ai_umami_caddy:
-    name: vue-tools-ai_umami_caddy
+  vue-ai-tools_umami_caddy:
+    name: vue-ai-tools_umami_caddy
     external: true

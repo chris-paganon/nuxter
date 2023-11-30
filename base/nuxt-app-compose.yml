@@ -10,7 +10,7 @@ services:
         APP_NAME: ${APP_NAME}
         REPO_URL: ${REPO_URL}
         REPO_BRANCH: ${REPO_BRANCH}
-    env_file: ../${APP_NAME}/nuxt-app.${APP_ENV}.env
+    env_file: ../${APP_NAME}/nuxter-config/nuxt-app.${APP_ENV}.env
     restart: unless-stopped
     networks:
       - caddy_nuxt_app
