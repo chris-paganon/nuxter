@@ -1,0 +1,3 @@
+[submodule "vue-ai-tools"]
+	path = vue-ai-tools
+	url = git@github.com:chris-paganon/vue-ai-tools.git
