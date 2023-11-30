@@ -33,6 +33,8 @@ services:
     networks:
       - umami_db
 
+  # TODO: Add a backup service here that runs pg_dumpall and uploads the dump to S3 once a week
+
 volumes:
   umami-db-data:
     
