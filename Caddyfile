@@ -14,7 +14,7 @@ staging.vueai.tools {
 	}
 	reverse_proxy vue-ai-tools-staging-nuxt-app:3000
 }
-staging.db.vueai.tools {
+stagingdb.vueai.tools {
 	reverse_proxy vue-ai-tools-staging-pb-db:8080
 }
 
