@@ -46,7 +46,8 @@ jobs:
         key: ${{ secrets.DROPLET_KEY }}
         script: |
           cd /opt/nuxter/${{ inputs.app_name }}
+          git fetch --all
+          git checkout ${{ github.ref_name }}
           git pull
-          git checkout ${{ github.ref }}
           cd nuxter-config
           docker compose -f ${{ inputs.app_name }}-${{ inputs.app_env }}-compose.yml up -d --build nuxt-app
