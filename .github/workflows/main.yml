@@ -11,8 +11,8 @@ jobs:
     name: Push changes to master
     runs-on: ubuntu-latest
     steps:
-      - uses: appleboy/ssh-action@v1.0.0
       - name: SSH into Droplet and pull git
+        uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.DROPLET_HOST }}
           username: ${{ secrets.DROPLET_USERNAME }}
