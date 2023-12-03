@@ -19,5 +19,5 @@ jobs:
           key: ${{ secrets.DROPLET_KEY }}
           script: |
             cd /opt/nuxter
-            git pull
             git checkout master
+            git pull
