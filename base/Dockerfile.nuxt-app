@@ -1,24 +1,8 @@
-FROM node:18-alpine as build-stage
+FROM node:18-alpine
 
 ARG APP_NAME
-ARG REPO_URL
-ARG REPO_BRANCH=master
-
-RUN apk add --no-cache git unzip
-
-ADD ${REPO_URL}${REPO_BRANCH}.zip /opt/${APP_NAME}-${REPO_BRANCH}.zip
-RUN unzip /opt/${APP_NAME}-${REPO_BRANCH}.zip -d /opt
-
-WORKDIR /opt/${APP_NAME}-${REPO_BRANCH}
-RUN npm install
-RUN npm run build
-
-
-FROM node:18-alpine as production-stage
-
-ARG APP_NAME
-ARG REPO_BRANCH=master
-COPY --from=build-stage /opt/${APP_NAME}-${REPO_BRANCH}/.output /opt/${APP_NAME}/.output
+ARG APP_ENV
+COPY ${APP_NAME}/.output.${APP_ENV} /opt/${APP_NAME}/.output
 
 WORKDIR /opt/${APP_NAME}/.output/server
 
