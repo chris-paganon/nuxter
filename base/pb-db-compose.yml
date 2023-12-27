@@ -5,9 +5,10 @@ services:
     container_name: ${APP_NAME}-${APP_ENV}-pb-db
     build: 
       context: .
-      dockerfile: Dockerfile.pb-db
+      dockerfile: base/Dockerfile.pb-db
       args:
         PB_ENCRYPTION_KEY: ${PB_ENCRYPTION_KEY}
+        APP_NAME: ${APP_NAME}
     restart: unless-stopped
     volumes:
       - pb_data:/pb/pb_data
