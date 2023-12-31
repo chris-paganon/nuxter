@@ -19,7 +19,6 @@ services:
       - vue-ai-tools_staging_caddy_nuxt_app
       - vue-ai-tools_production_caddy_pb_db
       - vue-ai-tools_staging_caddy_pb_db
-      - vue-ai-tools_umami_caddy
 
   umami:
     image: ghcr.io/umami-software/umami:postgresql-latest
