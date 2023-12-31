@@ -5,9 +5,11 @@ docker network create vue-ai-tools_staging_caddy_pb_db
 docker network create vue-ai-tools_umami_caddy
 
 docker compose up --force-recreate -d
-cd ./vue-ai-tools/nuxter-config
-docker compose -f ./vue-ai-tools-production-compose.yml up --build --remove-orphans -d
-docker compose -f ./vue-ai-tools-staging-compose.yml up --build --remove-orphans -d
+cd ./vue-ai-tools/
+
+docker compose -f .\nuxter-config\nuxter-base-compose.yml --env-file .\nuxter-config\production.env -p vue-ai-tools-production --project-directory ./ up --build --remove-orphans -d
+docker compose -f .\nuxter-config\nuxter-base-compose.yml --env-file .\nuxter-config\staging.env -p vue-ai-tools-staging --project-directory ./ up --build --remove-orphans -d
+
 cd ../../
 
 # TODO: Add a new file for deployments
