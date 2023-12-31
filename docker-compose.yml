@@ -14,17 +14,53 @@ services:
       - caddy_data:/data
       - caddy_config:/config
     networks:
+      - umami_caddy
       - vue-ai-tools_production_caddy_nuxt_app
       - vue-ai-tools_staging_caddy_nuxt_app
       - vue-ai-tools_production_caddy_pb_db
       - vue-ai-tools_staging_caddy_pb_db
       - vue-ai-tools_umami_caddy
 
+  umami:
+    image: ghcr.io/umami-software/umami:postgresql-latest
+    environment:
+      DATABASE_URL: postgresql://${UMAMI_POSTGRES_USER}:${UMAMI_POSTGRES_PASSWORD}@umami-db:5432/${UMAMI_POSTGRES_DB}
+      DATABASE_TYPE: postgresql
+      APP_SECRET: ${UMAMI_APP_SECRET}
+    depends_on:
+      umami-db:
+        condition: service_healthy
+    restart: always
+    networks:
+      - umami_caddy
+      - umami_db
+  umami-db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: ${UMAMI_POSTGRES_DB}
+      POSTGRES_USER: ${UMAMI_POSTGRES_USER}
+      POSTGRES_PASSWORD: ${UMAMI_POSTGRES_PASSWORD}
+    volumes:
+      - umami-db-data:/var/lib/postgresql/data
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - umami_db
+
+  # TODO: Add a backup service here that runs pg_dumpall and uploads the dump to S3 once a week
+
 volumes:
   caddy_data:
   caddy_config:
+  umami-db-data:
 
 networks:
+  umami_caddy:
+  umami_db:
   vue-ai-tools_production_caddy_nuxt_app:
     name: vue-ai-tools_production_caddy_nuxt_app
     external: true
