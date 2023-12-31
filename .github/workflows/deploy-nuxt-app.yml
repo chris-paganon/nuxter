@@ -49,5 +49,4 @@ jobs:
           git fetch --all
           git checkout ${{ github.ref_name }}
           git pull
-          cd nuxter-config
-          docker compose -f ${{ inputs.app_name }}-${{ inputs.app_env }}-compose.yml up -d --build nuxt-app
+          docker compose -f ./nuxter-config/nuxter-base-compose.yml --env-file ./nuxter-config/production.env -p ${{ inputs.app_name }}-${{ inputs.app_env }} --project-directory ./ up -d --build nuxt-app
