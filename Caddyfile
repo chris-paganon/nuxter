@@ -1,17 +1,17 @@
-umami.localhost {
+umami.vueai.tools {
 	reverse_proxy umami:3000
 }
 
-localhost {
+vueai.tools {
 	reverse_proxy vue-ai-tools-production-nuxt-app:3000
 }
-db.localhost {
+db.vueai.tools {
 	reverse_proxy vue-ai-tools-production-pb-db:8080
 }
 
-staging.localhost {
+staging.vueai.tools {
 	reverse_proxy vue-ai-tools-staging-nuxt-app:3000
 }
-stagingdb.localhost {
+stagingdb.vueai.tools {
 	reverse_proxy vue-ai-tools-staging-pb-db:8080
 }
