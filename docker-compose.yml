@@ -15,10 +15,10 @@ services:
       - caddy_config:/config
     networks:
       - umami_caddy
-      - vue-ai-tools_production_caddy_nuxt_app
-      - vue-ai-tools_staging_caddy_nuxt_app
-      - vue-ai-tools_production_caddy_pb_db
-      - vue-ai-tools_staging_caddy_pb_db
+      - vue-ai-tools-production_caddy_nuxt_app
+      - vue-ai-tools-staging_caddy_nuxt_app
+      - vue-ai-tools-production_caddy_pb_db
+      - vue-ai-tools-staging_caddy_pb_db
 
   umami:
     image: ghcr.io/umami-software/umami:postgresql-latest
@@ -60,18 +60,15 @@ volumes:
 networks:
   umami_caddy:
   umami_db:
-  vue-ai-tools_production_caddy_nuxt_app:
-    name: vue-ai-tools_production_caddy_nuxt_app
+  vue-ai-tools-production_caddy_nuxt_app:
+    name: vue-ai-tools-production_caddy_nuxt_app
     external: true
-  vue-ai-tools_staging_caddy_nuxt_app:
-    name: vue-ai-tools_staging_caddy_nuxt_app
+  vue-ai-tools-staging_caddy_nuxt_app:
+    name: vue-ai-tools-staging_caddy_nuxt_app
     external: true
-  vue-ai-tools_production_caddy_pb_db:
-    name: vue-ai-tools_production_caddy_pb_db
+  vue-ai-tools-production_caddy_pb_db:
+    name: vue-ai-tools-production_caddy_pb_db
     external: true
-  vue-ai-tools_staging_caddy_pb_db:
-    name: vue-ai-tools_staging_caddy_pb_db
-    external: true
-  vue-ai-tools_umami_caddy:
-    name: vue-ai-tools_umami_caddy
+  vue-ai-tools-staging_caddy_pb_db:
+    name: vue-ai-tools-staging_caddy_pb_db
     external: true
