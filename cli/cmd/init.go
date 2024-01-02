@@ -1,25 +1,32 @@
 package cmd
 
 import (
-	"os"
+	"log"
 
+	"github.com/go-git/go-git/v5"
 	"github.com/spf13/cobra"
 )
 
 // timezoneCmd represents the timezone command
 var initCmd = &cobra.Command{
-	Use:   "init",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Use:   "init [new-project-directory]",
+	Short: "Initialize a new Nuxter project",
+	Long:  `Initialize a new Nuxter project by cloning the Nuxter repository from GitHub.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		os.Mkdir("test", 0755)
-		// Git clone this repository: https://github.com/chris-paganon/jebatimatech
+		directory := args[0]
+		if directory == "" {
+			log.Fatalln("Please specify a directory for your new project.")
+		}
 
+		url := "https://github.com/chris-paganon/nuxter"
+		_, err := git.PlainClone(directory, false, &git.CloneOptions{
+			URL:               url,
+			RecurseSubmodules: git.DefaultSubmoduleRecursionDepth,
+		})
+
+		if err != nil {
+			log.Fatalln(err)
+		}
 	},
 }
 
