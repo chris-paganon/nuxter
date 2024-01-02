@@ -1,6 +1,6 @@
 package main
 
-import "nuxter/cli/cmd"
+import "nuxter/nuxter-cli/cmd"
 
 func main() {
 	cmd.Execute()
