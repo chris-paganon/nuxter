@@ -1,4 +1,4 @@
-module nuxter/cli
+module nuxter/nuxter-cli
 
 go 1.21.5
 
