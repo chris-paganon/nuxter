@@ -13,10 +13,10 @@ var initCmd = &cobra.Command{
 	Short: "Initialize a new Nuxter project",
 	Long:  `Initialize a new Nuxter project by cloning the Nuxter repository from GitHub.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		directory := args[0]
-		if directory == "" {
+		if len(args) == 0 || args[0] == "" {
 			log.Fatalln("Please specify a directory for your new project.")
 		}
+		directory := args[0]
 
 		url := "https://github.com/chris-paganon/nuxter"
 		_, err := git.PlainClone(directory, false, &git.CloneOptions{
