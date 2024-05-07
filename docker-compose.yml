@@ -17,8 +17,6 @@ services:
       - umami_caddy
       - vue-ai-tools-production_caddy_nuxt_app
       - vue-ai-tools-staging_caddy_nuxt_app
-      - vue-ai-tools-production_caddy_pb_db
-      - vue-ai-tools-staging_caddy_pb_db
 
   umami:
     image: ghcr.io/umami-software/umami:postgresql-latest
@@ -65,10 +63,4 @@ networks:
     external: true
   vue-ai-tools-staging_caddy_nuxt_app:
     name: vue-ai-tools-staging_caddy_nuxt_app
-    external: true
-  vue-ai-tools-production_caddy_pb_db:
-    name: vue-ai-tools-production_caddy_pb_db
-    external: true
-  vue-ai-tools-staging_caddy_pb_db:
-    name: vue-ai-tools-staging_caddy_pb_db
     external: true
