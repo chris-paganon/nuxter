@@ -38,6 +38,15 @@ jobs:
         LOCALPATH: .output/
         REMOTEPATH: /opt/nuxter/${{ inputs.app_name }}/.output.${{ inputs.app_env }}
         FLAGS: -avzr --delete
+    - name: Copy db migrations to Droplet
+      uses: contention/rsync-deployments@v2.0.0
+      with:
+        USER: ${{ secrets.DROPLET_USERNAME }}
+        HOST: ${{ secrets.DROPLET_HOST }}
+        DEPLOY_KEY: ${{ secrets.DROPLET_KEY }}
+        LOCALPATH: db/migrations/
+        REMOTEPATH: /opt/nuxter/${{ inputs.app_name }}/.output.${{ inputs.app_env }}/server/db/migrations
+        FLAGS: -avzr --delete
     - name: Restart docker on Droplet
       uses: appleboy/ssh-action@v1.0.0
       with:
