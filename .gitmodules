@@ -1,6 +1,6 @@
 [submodule "vue-ai-tools"]
 	path = vue-ai-tools
 	url = https://github.com/chris-paganon/vue-ai-tools.git
-[submodule "chrispaganon.github.io"]
+[submodule "chrispaganon"]
 	path = chrispaganon
 	url = https://github.com/chris-paganon/chrispaganon
