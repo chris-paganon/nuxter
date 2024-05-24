@@ -5,7 +5,13 @@ umami.vueai.tools {
 vueai.tools {
 	reverse_proxy vue-ai-tools-production-nuxt-app:3000
 }
-
 staging.vueai.tools {
 	reverse_proxy vue-ai-tools-staging-nuxt-app:3000
+}
+
+chrispaganon.com {
+	reverse_proxy chrispaganon-production-nuxt-app:3000
+}
+staging.chrispaganon.com {
+	reverse_proxy chrispaganon-staging-nuxt-app:3000
 }
