@@ -5,8 +5,14 @@ umami.vueai.tools {
 vueai.tools {
 	reverse_proxy vue-ai-tools-production-nuxt-app:3000
 }
+vector.vueai.tools {
+	reverse_proxy vue-ai-tools-production-vector-db:6333
+}
 staging.vueai.tools {
 	reverse_proxy vue-ai-tools-staging-nuxt-app:3000
+}
+staging.vector.vueai.tools {
+	reverse_proxy vue-ai-tools-staging-vector-db:6333
 }
 
 chrispaganon.com {
