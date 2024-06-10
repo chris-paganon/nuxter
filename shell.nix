@@ -6,6 +6,5 @@ in
 pkgs.mkShellNoCC {
   packages = with pkgs; [
     nodejs_20
-    sqlitebrowser
   ];
 }
