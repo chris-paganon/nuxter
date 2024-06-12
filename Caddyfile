@@ -11,7 +11,7 @@ umami.vueai.tools {
 vueai.tools {
 	reverse_proxy vue-ai-tools-production-nuxt-app:3000
 }
-auth.vector.vueai.tools {
+auth.vueai.tools {
 	reverse_proxy authelia:9091 {
 		import trusted_proxy_list
 	}
@@ -27,10 +27,24 @@ vector.vueai.tools {
 	}
 }
 staging.vueai.tools {
-	reverse_proxy vue-ai-tools-staging-nuxt-app:3000
+	forward_auth authelia:9091 {
+		uri /api/authz/forward-auth
+		copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
+		import trusted_proxy_list
+	}
+	reverse_proxy vue-ai-tools-staging-nuxt-app:3000 {
+		import trusted_proxy_list
+	}
 }
 staging.vector.vueai.tools {
-	reverse_proxy vue-ai-tools-staging-vector-db:6333
+	forward_auth authelia:9091 {
+		uri /api/authz/forward-auth
+		copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
+		import trusted_proxy_list
+	}
+	reverse_proxy vue-ai-tools-staging-vector-db:6333 {
+		import trusted_proxy_list
+	}
 }
 
 # ChrisPaganon.com
