@@ -1,22 +1,24 @@
 (trusted_proxy_list) {
 	trusted_proxies 192.168.0.0/16
 }
+# TODO: Create an authelia forward_auth block
+# TODO: Create a trusted_proxy_list import directive?
 
 # Analytics
-umami.vueai.tools {
+umami.{$VUE_AI_TOOLS_DOMAIN} {
 	reverse_proxy umami:3000
 }
 
 # VueAI.tools
-vueai.tools {
+{$VUE_AI_TOOLS_DOMAIN} {
 	reverse_proxy vue-ai-tools-production-nuxt-app:3000
 }
-auth.vueai.tools {
+auth.{$VUE_AI_TOOLS_DOMAIN} {
 	reverse_proxy authelia:9091 {
 		import trusted_proxy_list
 	}
 }
-vector.vueai.tools {
+vector.{$VUE_AI_TOOLS_DOMAIN} {
 	forward_auth authelia:9091 {
 		uri /api/authz/forward-auth
 		copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
@@ -26,7 +28,7 @@ vector.vueai.tools {
 		import trusted_proxy_list
 	}
 }
-staging.vueai.tools {
+staging.{$VUE_AI_TOOLS_DOMAIN} {
 	forward_auth authelia:9091 {
 		uri /api/authz/forward-auth
 		copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
@@ -36,7 +38,7 @@ staging.vueai.tools {
 		import trusted_proxy_list
 	}
 }
-staging.vector.vueai.tools {
+staging.vector.{$VUE_AI_TOOLS_DOMAIN} {
 	forward_auth authelia:9091 {
 		uri /api/authz/forward-auth
 		copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
@@ -48,9 +50,9 @@ staging.vector.vueai.tools {
 }
 
 # ChrisPaganon.com
-chrispaganon.com {
+{$CHRISPAGANON_DOMAIN} {
 	reverse_proxy chrispaganon-production-nuxt-app:3000
 }
-staging.chrispaganon.com {
+staging.{$CHRISPAGANON_DOMAIN} {
 	reverse_proxy chrispaganon-staging-nuxt-app:3000
 }

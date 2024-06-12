@@ -5,6 +5,9 @@ services:
   caddy:
     image: caddy:latest
     restart: unless-stopped
+    environment:
+      - VUE_AI_TOOLS_DOMAIN=${VUE_AI_TOOLS_DOMAIN}
+      - CHRISPAGANON_DOMAIN=${CHRISPAGANON_DOMAIN}
     ports:
       - '80:80'
       - '443:443'
