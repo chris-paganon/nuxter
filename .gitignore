@@ -3,3 +3,8 @@
 .direnv
 
 docker-compose.override.yml
+
+# Authelia
+authelia/secrets/
+authelia/config/users_database.yml
+authelia/config/db.sqlite3

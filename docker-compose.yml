@@ -15,6 +15,7 @@ services:
       - caddy_config:/config
     networks:
       - umami_caddy
+      - caddy_authelia
       - vue-ai-tools-production_caddy_nuxt_app
       - vue-ai-tools-production_vector_db
       - vue-ai-tools-staging_caddy_nuxt_app
@@ -52,6 +53,23 @@ services:
     networks:
       - umami_db
 
+  authelia:
+    container_name: authelia
+    image: 'authelia/authelia:latest'
+    expose:
+      - 9091
+    environment:
+      PUID: '1000'
+      PGID: '100'
+      AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET_FILE: '/secrets/JWT_SECRET'
+      AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE: '/secrets/STORAGE_ENCRYPTION_KEY'
+      AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE: '/secrets/NOTIFIER_SMTP_PASSWORD'
+    volumes:
+      - './authelia/config:/config'
+      - './authelia/secrets:/secrets'
+    networks:
+      - caddy_authelia
+
   # TODO: Add a backup service here that runs pg_dumpall and uploads the dump to S3 once a week
 
 volumes:
@@ -62,6 +80,7 @@ volumes:
 networks:
   umami_caddy:
   umami_db:
+  caddy_authelia:
   vue-ai-tools-production_caddy_nuxt_app:
     name: vue-ai-tools-production_caddy_nuxt_app
     external: true
