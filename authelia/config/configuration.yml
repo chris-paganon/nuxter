@@ -178,11 +178,13 @@ access_control:
   ## resource if there is no policy to be applied to the user.
   default_policy: 'deny'
   rules:
-    - domain: 'vector.vueai.localhost'
+    - domain: 'vector.vueai.tools'
       policy: 'two_factor'
-    - domain: 'staging.vueai.localhost'
+    - domain: 'staging.vueai.tools'
       policy: 'two_factor'
-    - domain: 'staging.vector.vueai.localhost'
+    - domain: 'staging.vector.vueai.tools'
+      policy: 'two_factor'
+    - domain: 'staging.chrispaganon.com'
       policy: 'two_factor'
 
 ##
@@ -194,8 +196,10 @@ session:
   ## Cookies configures the list of allowed cookie domains for sessions to be created on.
   ## Undefined values will default to the values below.
   cookies:
-    - domain: 'vueai.localhost'
-      authelia_url: 'https://auth.vueai.localhost'
+    - domain: 'vueai.tools'
+      authelia_url: 'https://auth.vueai.tools'
+    - domain: 'chrispaganon.com'
+      authelia_url: 'https://auth.chrispaganon.com'
 
   ## Cookie Session Domain default 'name' value.
   name: 'authelia_session'
