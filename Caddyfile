@@ -1,49 +1,42 @@
 (trusted_proxy_list) {
 	trusted_proxies 192.168.0.0/16
 }
-# TODO: Create an authelia forward_auth block
-# TODO: Create a trusted_proxy_list import directive?
-
-# Analytics
-umami.{$VUE_AI_TOOLS_DOMAIN} {
-	reverse_proxy umami:3000
+(authelia_forward_auth) {
+	forward_auth authelia:9091 {
+		uri /api/authz/forward-auth
+		copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
+		import trusted_proxy_list
+	}
 }
 
-# VueAI.tools
-{$VUE_AI_TOOLS_DOMAIN} {
-	reverse_proxy vue-ai-tools-production-nuxt-app:3000
+# Global services
+umami.{$VUE_AI_TOOLS_DOMAIN} {
+	reverse_proxy umami:3000
 }
 auth.{$VUE_AI_TOOLS_DOMAIN} {
 	reverse_proxy authelia:9091 {
 		import trusted_proxy_list
 	}
 }
+
+# VueAI.tools
+{$VUE_AI_TOOLS_DOMAIN} {
+	reverse_proxy vue-ai-tools-production-nuxt-app:3000
+}
 vector.{$VUE_AI_TOOLS_DOMAIN} {
-	forward_auth authelia:9091 {
-		uri /api/authz/forward-auth
-		copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
-		import trusted_proxy_list
-	}
+	import authelia_forward_auth
 	reverse_proxy vue-ai-tools-production-vector-db:6333 {
 		import trusted_proxy_list
 	}
 }
 staging.{$VUE_AI_TOOLS_DOMAIN} {
-	forward_auth authelia:9091 {
-		uri /api/authz/forward-auth
-		copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
-		import trusted_proxy_list
-	}
+	import authelia_forward_auth
 	reverse_proxy vue-ai-tools-staging-nuxt-app:3000 {
 		import trusted_proxy_list
 	}
 }
 staging.vector.{$VUE_AI_TOOLS_DOMAIN} {
-	forward_auth authelia:9091 {
-		uri /api/authz/forward-auth
-		copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
-		import trusted_proxy_list
-	}
+	import authelia_forward_auth
 	reverse_proxy vue-ai-tools-staging-vector-db:6333 {
 		import trusted_proxy_list
 	}
