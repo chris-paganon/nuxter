@@ -9,17 +9,17 @@
 	}
 }
 
-# Global services
+# Umami
 umami.{$VUE_AI_TOOLS_DOMAIN} {
 	reverse_proxy umami:3000
 }
+
+# VueAI.tools
 auth.{$VUE_AI_TOOLS_DOMAIN} {
 	reverse_proxy authelia:9091 {
 		import trusted_proxy_list
 	}
 }
-
-# VueAI.tools
 {$VUE_AI_TOOLS_DOMAIN} {
 	reverse_proxy vue-ai-tools-production-nuxt-app:3000
 }
@@ -43,9 +43,17 @@ staging.vector.{$VUE_AI_TOOLS_DOMAIN} {
 }
 
 # ChrisPaganon.com
+auth.{$CHRISPAGANON_DOMAIN} {
+	reverse_proxy authelia:9091 {
+		import trusted_proxy_list
+	}
+}
 {$CHRISPAGANON_DOMAIN} {
 	reverse_proxy chrispaganon-production-nuxt-app:3000
 }
 staging.{$CHRISPAGANON_DOMAIN} {
-	reverse_proxy chrispaganon-staging-nuxt-app:3000
+	import authelia_forward_auth
+	reverse_proxy chrispaganon-staging-nuxt-app:3000 {
+		import trusted_proxy_list
+	}
 }
