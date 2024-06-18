@@ -182,7 +182,7 @@ access_control:
       policy: 'two_factor'
     - domain: 'staging.vueai.tools'
       policy: 'two_factor'
-    - domain: 'staging.vector.vueai.tools'
+    - domain: 'stagingvector.vueai.tools'
       policy: 'two_factor'
     - domain: 'staging.chrispaganon.com'
       policy: 'two_factor'
