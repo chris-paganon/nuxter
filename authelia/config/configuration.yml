@@ -268,7 +268,7 @@ notifier:
   ##     (configure in tls section)
   smtp:
     ## The address of the SMTP server to connect to in the address common syntax.
-    address: 'smtp://smtp.sendgrid.net'
+    address: 'smtp://smtp.sendgrid.net:587'
     ## The username used for SMTP authentication.
     username: 'apikey'
     ## The password used for SMTP authentication.
