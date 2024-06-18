@@ -37,7 +37,7 @@ staging.{$VUE_AI_TOOLS_DOMAIN} {
 		import trusted_proxy_list
 	}
 }
-staging.vector.{$VUE_AI_TOOLS_DOMAIN} {
+stagingvector.{$VUE_AI_TOOLS_DOMAIN} {
 	import authelia_forward_auth
 	reverse_proxy vue-ai-tools-staging-vector-db:6333 {
 		import trusted_proxy_list
