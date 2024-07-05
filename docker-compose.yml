@@ -58,6 +58,7 @@ services:
   authelia:
     container_name: authelia
     image: 'authelia/authelia:latest'
+    restart: always
     expose:
       - 9091
     environment:
