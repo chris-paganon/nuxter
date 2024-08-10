@@ -16,6 +16,11 @@ umami.{$VUE_AI_TOOLS_DOMAIN} {
 	reverse_proxy umami:3000
 }
 
+# Grafana
+graphana.{$VUE_AI_TOOLS_DOMAIN} {
+	reverse_proxy graphana:3000
+}
+
 # VueAI.tools
 auth.{$VUE_AI_TOOLS_DOMAIN} {
 	reverse_proxy authelia:9091 {

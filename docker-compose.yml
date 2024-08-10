@@ -18,6 +18,7 @@ services:
     networks:
       - umami_caddy
       - caddy_authelia
+      - caddy_graphana
       - vue-ai-tools-production_caddy_nuxt_app
       - vue-ai-tools-production_vector_db
       - vue-ai-tools-staging_caddy_nuxt_app
@@ -76,29 +77,36 @@ services:
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
     restart: always
-    ports:
-      - 8080:8080
+    expose:
+      - 8080
     volumes:
       - '/:/rootfs:ro'
       - '/var/run:/var/run:ro'
       - '/sys:/sys:ro'
       - '/var/lib/docker/:/var/lib/docker:ro'
       - '/dev/disk/:/dev/disk:ro'
+    networks:
+      - monitoring
   prometheus:
     image: prom/prometheus:latest
     restart: always
-    ports:
-      - '9090:9090'
+    expose:
+      - 9090
     volumes:
       - './prometheus.yml:/etc/prometheus/prometheus.yml'
       - 'prometheus-data:/prometheus'
+    networks:
+      - monitoring
   graphana:
     image: grafana/grafana-enterprise:latest
     restart: always
-    ports:
-      - '3000:3000'
+    expose:
+      - 3000
     volumes:
       - 'grafana-storage:/var/lib/grafana'
+    networks:
+      - monitoring
+      - caddy_graphana
 
   # TODO: Add a backup service here that runs pg_dumpall and uploads the dump to S3 once a week
 
@@ -113,6 +121,8 @@ networks:
   umami_caddy:
   umami_db:
   caddy_authelia:
+  caddy_graphana:
+  monitoring:
   vue-ai-tools-production_caddy_nuxt_app:
     name: vue-ai-tools-production_caddy_nuxt_app
     external: true
