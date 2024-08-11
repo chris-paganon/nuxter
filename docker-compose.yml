@@ -104,6 +104,7 @@ services:
       - 3000
     volumes:
       - 'grafana-storage:/var/lib/grafana'
+      - './grafana/provisioning:/etc/grafana/provisioning'
     networks:
       - monitoring
       - caddy_grafana
