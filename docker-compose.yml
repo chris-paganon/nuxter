@@ -18,7 +18,7 @@ services:
     networks:
       - umami_caddy
       - caddy_authelia
-      - caddy_graphana
+      - caddy_grafana
       - vue-ai-tools-production_caddy_nuxt_app
       - vue-ai-tools-production_vector_db
       - vue-ai-tools-staging_caddy_nuxt_app
@@ -97,7 +97,7 @@ services:
       - 'prometheus-data:/prometheus'
     networks:
       - monitoring
-  graphana:
+  grafana:
     image: grafana/grafana-enterprise:latest
     restart: always
     expose:
@@ -106,7 +106,7 @@ services:
       - 'grafana-storage:/var/lib/grafana'
     networks:
       - monitoring
-      - caddy_graphana
+      - caddy_grafana
 
   # TODO: Add a backup service here that runs pg_dumpall and uploads the dump to S3 once a week
 
@@ -121,7 +121,7 @@ networks:
   umami_caddy:
   umami_db:
   caddy_authelia:
-  caddy_graphana:
+  caddy_grafana:
   monitoring:
   vue-ai-tools-production_caddy_nuxt_app:
     name: vue-ai-tools-production_caddy_nuxt_app

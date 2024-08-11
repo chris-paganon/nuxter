@@ -17,8 +17,8 @@ umami.{$VUE_AI_TOOLS_DOMAIN} {
 }
 
 # Grafana
-graphana.{$VUE_AI_TOOLS_DOMAIN} {
-	reverse_proxy graphana:3000
+grafana.{$VUE_AI_TOOLS_DOMAIN} {
+	reverse_proxy grafana:3000
 }
 
 # VueAI.tools
