@@ -98,7 +98,7 @@ services:
     networks:
       - monitoring
   grafana:
-    image: grafana/grafana-enterprise:latest
+    image: grafana/grafana-oss:latest
     restart: always
     expose:
       - 3000
