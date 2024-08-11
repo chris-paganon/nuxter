@@ -86,7 +86,7 @@ services:
       - '/var/lib/docker/:/var/lib/docker:ro'
       - '/dev/disk/:/dev/disk:ro'
     networks:
-      - monitoring
+      - prometheus_cadvisor
   prometheus:
     image: prom/prometheus:latest
     restart: always
@@ -96,7 +96,8 @@ services:
       - './prometheus.yml:/etc/prometheus/prometheus.yml'
       - 'prometheus-data:/prometheus'
     networks:
-      - monitoring
+      - grafana_prometheus
+      - prometheus_cadvisor
   grafana:
     image: grafana/grafana-oss:latest
     restart: always
@@ -106,7 +107,7 @@ services:
       - 'grafana-storage:/var/lib/grafana'
       - './grafana/provisioning:/etc/grafana/provisioning'
     networks:
-      - monitoring
+      - grafana_prometheus
       - caddy_grafana
 
   # TODO: Add a backup service here that runs pg_dumpall and uploads the dump to S3 once a week
@@ -123,7 +124,8 @@ networks:
   umami_db:
   caddy_authelia:
   caddy_grafana:
-  monitoring:
+  prometheus_cadvisor:
+  grafana_prometheus:
   vue-ai-tools-production_caddy_nuxt_app:
     name: vue-ai-tools-production_caddy_nuxt_app
     external: true
