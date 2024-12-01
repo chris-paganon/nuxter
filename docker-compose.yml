@@ -19,6 +19,7 @@ services:
       - umami_caddy
       - caddy_authelia
       - caddy_grafana
+      - caddy_dozzle
       - vue-ai-tools-production_caddy_nuxt_app
       - vue-ai-tools-production_vector_db
       - vue-ai-tools-staging_caddy_nuxt_app
@@ -116,6 +117,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       DOZZLE_NO_ANALYTICS: true
+    networks:
+      - caddy_dozzle
 
 volumes:
   caddy_data:
@@ -131,6 +134,7 @@ networks:
   caddy_grafana:
   prometheus_cadvisor:
   grafana_prometheus:
+  caddy_dozzle:
   vue-ai-tools-production_caddy_nuxt_app:
     name: vue-ai-tools-production_caddy_nuxt_app
     external: true
