@@ -178,6 +178,12 @@ access_control:
   ## resource if there is no policy to be applied to the user.
   default_policy: 'deny'
   rules:
+    - domain: 'umami.vueai.tools'
+      policy: 'two_factor'
+    - domain: 'grafana.vueai.tools'
+      policy: 'two_factor'
+    - domain: 'dozzle.vueai.tools'
+      policy: 'two_factor'
     - domain: 'vector.vueai.tools'
       policy: 'two_factor'
     - domain: 'staging.vueai.tools'
